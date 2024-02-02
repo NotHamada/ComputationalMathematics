@@ -33,4 +33,4 @@ Calculate()
 
 df = DataFrame(B=Diferences)
 plot = @df df StatsPlots.plot(:B)
-savefig(plot, "graph.png")
+savefig(plot, "sqrt.png")
