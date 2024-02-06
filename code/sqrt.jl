@@ -61,6 +61,6 @@ Generator()
 Calculate()
 
 df = DataFrame(B=Diferences)
-plot = @df df StatsPlots.plot(:B)
+plot = @df df StatsPlots.plot(:B,title="Real square root x Machine square root", label=["machine sqrt - real sqrt"])
 
 savefig(plot, "Sqrt.png")
