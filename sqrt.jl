@@ -2,6 +2,35 @@ using StatsPlots, DataFrames
 
 global Numbers = []
 global Diferences = []
+global Sqrt2 = 1.4142135623730950488016887242097
+
+function K(number)
+    if number == 0.0
+        return 0.0
+    else
+        exp = exponent(number) - 1
+        return exp
+    end
+end
+
+function RealLog2(value)
+    global Sqrt2
+
+    if value < 0
+        return (1 / RealLog2(abs(value)))
+    end
+    if value == 0
+        return 1
+    end
+    if value == 1
+        return Sqrt2
+    end
+    if value % 2 == 0
+        return (2^(value / 2))
+    else
+        return (Sqrt2 * (2^((value - 1) / 2)))
+    end
+end
 
 function Generator()
     start = 0
@@ -15,15 +44,15 @@ end
 
 function Calculate()
     for number in Numbers
-        e = floor(log2(number))
-        f = (number / (2^e)) - 1
+        e = K(number)
+        f = (number / (2^float(e))) - 1
 
-        squareRootE = sqrt(2^e)
-        squareRootF = (1 + f / 2) * (1 - (f / (4 + 2 * f)))
+        squareRootE = RealLog2(e)
+        squareRootF = 1 + (f / 2) * (1 - (f / (4 + (2 * f))))
 
         realRoot = squareRootE * squareRootF
 
-        diff = sqrt(number) - realRoot
+        diff = abs(sqrt(number) - realRoot)
         push!(Diferences, diff)
     end
 end
@@ -33,4 +62,5 @@ Calculate()
 
 df = DataFrame(B=Diferences)
 plot = @df df StatsPlots.plot(:B)
-savefig(plot, "sqrt.png")
+
+savefig(plot, "Sqrt.png")
