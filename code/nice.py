@@ -173,7 +173,7 @@ def Diferences(solutions, results):
     return diferences
 
 start = 0
-end = 10
+end = 30
 delta = 0.05
 solutions = CalculateExponential(start, end, delta)
 array_values = Values(start, end, delta)
