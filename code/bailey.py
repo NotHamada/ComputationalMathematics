@@ -19,7 +19,7 @@ def Bailey(x):
     r = (x - n * ln2)/256
     return pow(2, n) * pow((pow(e, int(r)) * Horner(r - int(r))), 256)
 
-x = [i for i in np.arange(0, 30, 0.05)]
+x = [i for i in np.arange(0, 10, 0.05)]
 diff = [abs(math.exp(i) - Bailey(i)) for i in x]
 
 plt.figure().set_figwidth(10)
